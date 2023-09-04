@@ -1,4 +1,7 @@
-.AboutImg img{
-    height: 300px;
-    border-radius: 999px;
+.AboutImg{
+    width: 300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr ;
+    grid-gap: 20px;
 }
