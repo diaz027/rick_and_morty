@@ -1,5 +1,6 @@
 import { ADD_FAV, REMOVE_FAV, FILTER, ORDER } from "./action-types";
 
+
 const initialState = {
  myFavorites: [],//original
  allCharacters: [] //copia
@@ -7,19 +8,17 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
-    case ADD_FAV:
-        return {
-            ...state,
-            myFavorites:[...state.myFavorites, action.payload],//original
-            allCharacters:[...state.allCharacters, action.payload]//copia
-        }
+      // REDUCER | ADD_FAV
+      case ADD_FAV:
+        return { ...state, myFavorites: action.payload, allCharacters: action.payload };
 
-    case REMOVE_FAV:
-        return {
-            ...state,
-            myFavorites: state.myFavorites.filter(fav => fav.id !== parseInt(action.payload)),
-            allCharacters: state.allCharacters.filter(fav => fav.id !== parseInt(action.payload))
-        }
+        case REMOVE_FAV:
+            return { 
+                ...state, myFavorites: action.payload, allCharacters: action.payload };
+            //     myFavorites: state.myFavorites.filter(fav => fav.id !== parseInt(action.payload)),
+            //     allCharacters: state.allCharacters.filter(fav => fav.id !== parseInt(action.payload))
+            // }
+        
     
     case FILTER:
         const copy = [...state.allCharacters] 

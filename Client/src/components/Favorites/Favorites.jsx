@@ -60,7 +60,9 @@ const mapStateToProps = (state) => {
     }
 }
 
+ //const myFavorites = useSelector((state) => state.myFavorites);
 export default connect(
     mapStateToProps,
     null
 )(Favorites);
+//export default (Favorites, myFavorites)
