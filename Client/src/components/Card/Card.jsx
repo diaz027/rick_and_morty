@@ -35,10 +35,9 @@ function Card({id, name, species, gender, image, onClose, addFav, removeFav, myF
          <Link to={`/detail/${id}`}>
          <h2>{name}</h2>
          </Link>
-         
+
          <h2>{species}</h2>
          <h2>{gender}</h2>
-
          <img className={style.imag} src={image} alt='' /> 
       </div>
    );
