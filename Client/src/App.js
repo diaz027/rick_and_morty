@@ -18,29 +18,28 @@ function App() {
    const [characters, setCharacters] = useState([]);
    const [access, setAccess] = useState(false);
 
-   function login(userData) {
+  const login = async(userData) => {
       const { email, password } = userData;
       const URL = 'http://localhost:3001/rickandmorty/login/';
-      axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
-         const { access } = data;
+      try {const response = await axios.get(URL + `?email=${email}&password=${password}`)
+         const { data, access } = response.data;
          setAccess(data);
          access && navigate('/home');
-      });
+      } catch (error) {console.error('Error en la solicitud', error)};
    }
    useEffect(() => {
       !access && navigate('/')
    }, [access])
 
-   const onSearch = (id) => {
-      axios(`http://localhost:3001/rickandmorty/character/${id}`)
-      .then( response => response.data)
-      .then((data) => {
+   const onSearch = async (id) => {
+    try {  const response = await axios.get(`http://localhost:3001/rickandmorty/character/${id}`)
+          const { data } = response;
          if (data.name) {
             setCharacters((oldChars) => [...oldChars, data]);
          } else {
             alert('¡No hay personajes con este ID!');
          }
-      });
+    } catch (error) {console.error('Error en la solicitud', error)};
    }
    const onClose = (id) => {
       const charactersFiltered = characters.filter(characters => characters.id !== id)
