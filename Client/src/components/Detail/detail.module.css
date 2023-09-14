@@ -1,12 +1,16 @@
 .detail{
-    width: 200px; ;
+    width: 200px;
+    top: 100px;
     background-color: black;
     padding: 0,5px;
     border-radius: 10px;
     color: white;
     background-image: url('../../assets/rick-y-morty-escapando-de-portal_3840x2160_xtrafondos.com.jpg');
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 0, 255, 0.8); 
 }
+
 
 .imag{
     border-radius: 999ex;

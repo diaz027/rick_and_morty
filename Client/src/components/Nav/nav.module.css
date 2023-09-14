@@ -1,0 +1,78 @@
+/* Estilos para la barra de navegación */
+.navbar {
+  background: rgb(19, 18, 18); 
+  box-shadow: 0px 2px 5px rgba(175, 8, 8, 0.5);
+  color: #ffffff; 
+  width: 100%;
+  padding: 0px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+}
+
+/* / Estilos para los enlaces de navegación / */
+.navbar a {
+  text-decoration: none;
+  color: #ffffff;
+  margin: 0 25px;
+  font-size: 18px;
+  transition: color 0.3s ease; 
+}
+
+/* / Estilos para los botones / */
+.button {
+    background-color: black;
+    border: none;
+    border-radius: 50px; /* Hace que los bordes del botón sean redondos */
+    color: white;
+    padding: 15px 30px;
+    cursor: pointer;
+    position: relative;
+    left: 500px;
+    bottom: 20px;
+    overflow: hidden;
+  }
+  
+  .button::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, white); /* Agrega el efecto de luz blanca */
+    top: 0;
+    left: -100%;
+    transition: left 0.5s; /* Controla la velocidad de la animación de la luz */
+  }
+  
+  .button:hover::before {
+    left: 100%;
+  }
+
+/* / Estilos para el contenedor de la SearchBar / */
+.searchBarContainer {
+  margin-right: 20px; 
+  margin-left: 20px;
+  position: relative;
+  top: 10px;
+}
+
+/* / Media Query para tamaños de pantalla más pequeños / */
+ @media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; 
+    align-items: center; 
+    padding: 20px;
+  }
+
+  .searchBarContainer {
+    margin: 20px 0; 
+  }
+
+  .button {
+    margin: 5px 0;
+}
+}

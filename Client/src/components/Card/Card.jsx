@@ -1,15 +1,17 @@
 import style from './card.module.css'
-import { Link } from 'react-router-dom';
+import { Link, useLocation,} from 'react-router-dom';
 import { addFav, removeFav } from '../../Redux/actions';
 import { useDispatch, useSelector } from 'react-redux'; 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 
 function Card({id, name, species, gender, image, onClose,}) {
 
    const [isFav, setIsFav] = useState(false);
+   const {pathname} = useLocation();
    const dispatch = useDispatch()
    const myFavorites = useSelector(state => state.myFavorites)
+   const cardRef = useRef(null);
 
    const handleFavorite = () => {
       if(isFav) {
@@ -28,12 +30,31 @@ function Card({id, name, species, gender, image, onClose,}) {
       });
    }, [myFavorites]);
 
-   return (
-      <div className={style.card}> 
-         
-      <button onClick={handleFavorite}>{isFav ? '❤️' : '🤍' }</button>
+   const handleMouseMove = (e) => {
+      const card = cardRef.current;
+      const cardRect = card.getBoundingClientRect();
+      const mouseX = e.clientX - cardRect.left - cardRect.width / 2;
+      const mouseY = e.clientY - cardRect.top - cardRect.height / 2;
+      
+      card.style.transform = `perspective(1000px) rotateX(${mouseY / -10}deg) rotateY(${mouseX / 10}deg)`;
+    }
+  
+    const handleMouseLeave = () => {
+      const card = cardRef.current;
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    }
 
-          <button onClick={() => onClose(id)}>X</button>
+   return (
+      <div
+      className={`${style.card}`}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      ref={cardRef}
+    >
+         
+      <button className={style.boton} onClick={handleFavorite}>{isFav ? '❤️' : '🤍' }</button>
+
+         { pathname!== '/favorites' && <button className={style.boton} onClick={() => onClose(id)}>X</button>}
          
          <Link to={`/detail/${id}`}>
          <h2>{name}</h2>
